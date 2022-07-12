@@ -4,69 +4,93 @@ import './menu.css'
 import { useState } from 'react'
 
 
-function Menu() {
+function Menu(props) {
   // 
   const card = [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-    { id: '4' },
-    { id: '5' },
-    { id: '6' },
-    { id: '7' },
-    { id: '8' },
+    {
+      id: 1,
+      img: "./card_home.png",
+      p: 'Продаю 10km дом  в Бишкеке',
+      price: 5000
+    },
+    {
+      id: 2,
+      img: "./home2.jpg",
+      p: 'Продаю 15km дом  в Бишкеке',
+      price: 25000,
+    },
+    {
+      id: 3,
+      img: "./hom3.jpg",
+      p: 'Продаю 2km дом  в Бишкеке',
+      price: 2000,
+    },
+    {
+      id: 4,
+      img: "./home4.jfif",
+      p: 'Продаю 20km дом  в Бишкеке',
+      price: 4500
+    },
+    {
+      id: 5,
+      img: "./home5.jfif",
+      p: 'Продаю 8km дом  в Бишкеке',
+      price: 7400
+    },
+    {
+      id: 6,
+      img: "./home6.jfif",
+      p: 'Продаю 12km дом  в Бишкеке',
+      price: 24000
+    },
+    {
+      id: 7,
+      img: "./home7.jfif",
+      p: 'Продаю 7km дом  в Бишкеке',
+      price: 6000
+    },
+    {
+      id: 8,
+      img: "./home8.jpg",
+      p: 'Продаю 12km дом  в Бишкеке',
+      price: 12000
+    },
   ]
   //
-  const [state, setState] = useState(card)
+  const [objArr, setValue] = useState(card);
   // 
-  const deleteTodo = (id) => {
-    const newArr = state.filter((item) => {
-      return item.id !== id
-    })
-    setState(newArr)
+  function Delete(id) { // удаление объекта из массива при совпадении id
+    setValue(objArr.filter(obj => obj.id != id));
   }
   //
+  const result = objArr.map((obj) => {
+    return <div className='card'>
+      <div>
+        <img src={obj.img} />
+        <p>{obj.p}</p>
+        <div>{obj.price}</div>
+        <div className='btn' key={obj.id}>
+          <button  onClick={() => Delete(obj.id)}>Купить</button>
+        </div>
+      </div>
+    </div>
+  });
 
   return (
-    <menu onDelete={deleteTodo} >
+    <menu >
 
       <div className='last_Adt'>
         <h1>Последние объявления</h1>
       </div>
 
-      <div className='square'>
-        <Card id='1' img="./card_home.png"
-          p={'Продаю 10km дом  в Бишкеке'}
-          price={5000}
-        />
-        <Card id='2' img="./home2.jpg"
-          p={'Продаю 15km дом  в Бишкеке'}
-          price={25000}
-        />
-        <Card id='3' img="./hom3.jpg"
-          p={'Продаю 2km дом  в Бишкеке'}
-          price={2000}
-        />
-        <Card id='4' img="./home4.jfif"
-          p={'Продаю 20km дом  в Бишкеке'}
-          price={4500}
-        />
-        <Card id='5' img="./home5.jfif"
-          p={'Продаю 8km дом  в Бишкеке'}
-          price={7400}
-        />
-        <Card id='6' img="./home6.jfif"
-          p={'Продаю 12km дом  в Бишкеке'}
-          price={24000}
-        />
-        <Card id='7' img="./home7.jfif"
-          p={'Продаю 7km дом  в Бишкеке'}
-          price={6000}
-        />
-        <Card id='8' img="./home8.jpg"
-          p={'Продаю 12km дом  в Бишкеке'}
-          price={12000}
-        />
+      <div>
+
+        {/*  */}
+        <div className='square'>
+          {result}
+        </div>
+        {/*  */}
+
       </div>
 
 
