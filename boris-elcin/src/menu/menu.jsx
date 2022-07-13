@@ -59,21 +59,20 @@ function Menu(props) {
   //
   const [objArr, setValue] = useState(card);
   // 
-  function Delete(id) { // удаление объекта из массива при совпадении id
-    setValue(objArr.filter(obj => obj.id != id));
+  function Delete(id) {
+    console.log(id)
+    setValue(objArr.filter(obj => { return obj.id != id }));
   }
+  
   //
   const result = objArr.map((obj) => {
-    return <div className='card'>
-      <div>
-        <img src={obj.img} />
-        <p>{obj.p}</p>
-        <div>{obj.price}</div>
-        <div className='btn' key={obj.id}>
-          <button  onClick={() => Delete(obj.id)}>Купить</button>
-        </div>
-      </div>
-    </div>
+    return <Card 
+    onDelete={Delete} 
+    img={obj.img} 
+    p={obj.p} 
+    price={obj.price} 
+    id={obj.id} />
+    
   });
 
   return (
